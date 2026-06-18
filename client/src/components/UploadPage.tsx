@@ -1,65 +1,70 @@
-import { useState } from 'react'
-import type { ProcessingResult } from '../types'
+import { useState } from "react";
+import type { ProcessingResult } from "../types";
 
 interface UploadPageProps {
-  onComplete: (result: ProcessingResult) => void
+  onComplete: (result: ProcessingResult) => void;
 }
 
 export default function UploadPage({ onComplete }: UploadPageProps) {
-  const [file, setFile] = useState<File | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selected = e.target.files?.[0]
+    const selected = e.target.files?.[0];
     if (selected) {
-      if (!selected.name.toLowerCase().endsWith('.csv')) {
-        setError('Please select a CSV file')
-        setFile(null)
-        return
+      if (!selected.name.toLowerCase().endsWith(".csv")) {
+        setError("Please select a CSV file");
+        setFile(null);
+        return;
       }
-      setFile(selected)
-      setError(null)
+      setFile(selected);
+      setError(null);
     }
-  }
+  };
 
   const handleUpload = async () => {
     if (!file) {
-      setError('Please select a file first')
-      return
+      setError("Please select a file first");
+      return;
     }
 
-    setLoading(true)
-    setError(null)
+    setLoading(true);
+    setError(null);
 
-    const formData = new FormData()
-    formData.append('file', file)
+    const formData = new FormData();
+    formData.append("file", file);
 
     try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      })
+      const res = await fetch(
+        "https://xeno-server-vqfb.onrender.com/api/upload",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
 
       if (!res.ok) {
-        const err = await res.json()
-        throw new Error(err.error || 'Upload failed')
+        const err = await res.json();
+        throw new Error(err.error || "Upload failed");
       }
 
-      const result: ProcessingResult = await res.json()
-      onComplete(result)
+      const result: ProcessingResult = await res.json();
+      onComplete(result);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong')
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="page">
       <div className="card upload-card">
         <h1>CSV Transaction Validator</h1>
-        <p className="subtitle">Upload a transaction CSV file for validation and processing</p>
+        <p className="subtitle">
+          Upload a transaction CSV file for validation and processing
+        </p>
 
         <div className="upload-zone">
           <input
@@ -71,12 +76,16 @@ export default function UploadPage({ onComplete }: UploadPageProps) {
             className="file-input"
           />
           <label htmlFor="file-input" className="file-label">
-            {file ? file.name : 'Choose a CSV file'}
+            {file ? file.name : "Choose a CSV file"}
           </label>
         </div>
 
         {file && !loading && (
-          <button onClick={handleUpload} className="btn btn-primary" disabled={loading}>
+          <button
+            onClick={handleUpload}
+            className="btn btn-primary"
+            disabled={loading}
+          >
             Upload & Process
           </button>
         )}
@@ -91,5 +100,5 @@ export default function UploadPage({ onComplete }: UploadPageProps) {
         {error && <p className="error">{error}</p>}
       </div>
     </div>
-  )
+  );
 }
