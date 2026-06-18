@@ -1,2 +1,7 @@
-Row ID,Order Priority,Discount,Unit Price,Shipping Cost,Customer ID,Customer Name,Ship Mode,Customer Segment,Product Category,Product Sub-Category,Product Container,Product Name,Product Base Margin,Region,State or Province,City,Postal Code,Order Date,Ship Date,Profit,Quantity ordered new,Sales,Order ID,status
-18606,Not Specified,0.01,2.88,0.5,2,Janice Fletcher,Regular Air,Corporate,Office Supplies,Labels,Small Box,Avery 49,0.36,Central,Illinois,Addison,60101,5/28/2012,5/30/2012,1.32,2,5.9,88525,VALID
+customer_id,full_name,email,phone_number,city,signup_date,status
+251212,Shanaya Madan,ahana-vora@gmail.com,7332867654,Chennai,21-04-2023,VALID
+848133,Mannat Talwar,akarsh20@wason.com,8578396720,Pune,11-06-2024,VALID
+128097,Jayesh Jha,urvi41@yahoo.com,9834699453,Kolkata,24-03-2025,VALID
+512203,Tushar Rau,lmangat@yahoo.com,8215928685,Delhi,08-02-2024,VALID
+277847,Dhruv Raman,koshyyashvi@balakrishnan.com,8852639340,Mumbai,20-09-2023,VALID
+759139,Priyansh Sha,lavanya40@gmail.com,9666390588,Bangalore,08-03-2025,VALID

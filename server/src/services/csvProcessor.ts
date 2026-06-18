@@ -2,9 +2,10 @@ import fs from 'fs'
 import path from 'path'
 import csvParser from 'csv-parser'
 import { stringify } from 'csv-stringify'
+import { loadCountries } from '../utils/fileUtils'
 import { buildColumnRules, validateRow } from './validator'
 import type { ColumnRule } from './validator'
-import type { ProcessingResult } from '../types'
+import type { ProcessingResult, Countries } from '../types'
 
 const CHUNK_SIZE = 10000
 
@@ -51,6 +52,7 @@ class CleanedChunkWriter {
 
 export async function processCSV(filePath: string, outputDir: string): Promise<ProcessingResult> {
   return new Promise((resolve, reject) => {
+    const countries: Countries = loadCountries()
     let columnRules: Record<string, ColumnRule> = {}
 
     let totalRows = 0
@@ -75,7 +77,7 @@ export async function processCSV(filePath: string, outputDir: string): Promise<P
 
     parser.on('data', (row: Record<string, string>) => {
       totalRows++
-      const result = validateRow(row, totalRows, columnRules)
+      const result = validateRow(row, totalRows, columnRules, countries)
       if (result.valid) {
         validRows++
         cleanedWriter?.write(row)
