@@ -5,6 +5,8 @@ import type { Countries } from '../types'
 const CONFIG_DIR = path.resolve('config')
 const COUNTRIES_PATH = path.join(CONFIG_DIR, 'countries.json')
 
+export const OUTPUT_DIR = path.resolve(import.meta.dirname, '..', '..', 'output')
+
 export function loadCountries(): Countries {
   try {
     const data = fs.readFileSync(COUNTRIES_PATH, 'utf-8')

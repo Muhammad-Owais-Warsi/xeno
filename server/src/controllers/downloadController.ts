@@ -1,8 +1,7 @@
 import type { Request, Response } from 'express'
 import fs from 'fs'
 import path from 'path'
-
-const OUTPUT_DIR = path.resolve('output')
+import { OUTPUT_DIR } from '../utils/fileUtils'
 
 export async function handleDownload(req: Request, res: Response) {
   try {

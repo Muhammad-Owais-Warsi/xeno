@@ -1,9 +1,7 @@
 import type { Request, Response } from 'express'
 import fs from 'fs'
-import path from 'path'
 import { processCSV } from '../services/csvProcessor'
-
-const OUTPUT_DIR = path.resolve('output')
+import { OUTPUT_DIR } from '../utils/fileUtils'
 
 export async function handleUpload(req: Request, res: Response) {
   try {

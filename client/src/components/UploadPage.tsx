@@ -36,13 +36,10 @@ export default function UploadPage({ onComplete }: UploadPageProps) {
     formData.append("file", file);
 
     try {
-      const res = await fetch(
-        "https://xeno-server-vqfb.onrender.com/api/upload",
-        {
-          method: "POST",
-          body: formData,
-        },
-      );
+      const res = await fetch("https://xeno-server-vqfb.onrender.com/api/upload", {
+        method: "POST",
+        body: formData,
+      });
 
       if (!res.ok) {
         const err = await res.json();

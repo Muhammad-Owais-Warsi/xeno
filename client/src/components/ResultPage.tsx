@@ -7,6 +7,7 @@ interface ResultPageProps {
 
 export default function ResultPage({ result, onReset }: ResultPageProps) {
   const { totalRows, validRows, invalidRows, cleanedFiles, errorFile, detectedFields } = result
+  const apiBase = "https://xeno-server-vqfb.onrender.com"
 
   const validPercent = totalRows > 0 ? Math.round((validRows / totalRows) * 100) : 0
   const invalidPercent = totalRows > 0 ? Math.round((invalidRows / totalRows) * 100) : 0
@@ -48,7 +49,7 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
             {cleanedFiles.map((file) => (
               <a
                 key={file}
-                href={`/api/download/${file}`}
+                href={`${apiBase}/api/download/${file}`}
                 className="btn btn-success"
                 download
               >
@@ -56,7 +57,7 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
               </a>
             ))}
             <a
-              href={`/api/download/${errorFile}`}
+              href={`${apiBase}/api/download/${errorFile}`}
               className="btn btn-warning"
               download
             >
