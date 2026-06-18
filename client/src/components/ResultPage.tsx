@@ -48,7 +48,7 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
             {cleanedFiles.map((file) => (
               <a
                 key={file}
-                href={`/output/${file}`}
+                href={`/api/download/${file}`}
                 className="btn btn-success"
                 download
               >
@@ -56,7 +56,7 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
               </a>
             ))}
             <a
-              href={`/output/${errorFile}`}
+              href={`/api/download/${errorFile}`}
               className="btn btn-warning"
               download
             >

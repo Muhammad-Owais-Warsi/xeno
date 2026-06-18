@@ -10,14 +10,20 @@ const PORT = process.env.PORT || 3001;
 const OUTPUT_DIR = path.resolve("output");
 ensureDir(OUTPUT_DIR);
 
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",")
+  : [
+      "http://localhost:5173",
+      "http://localhost:3001",
+      "https://xeno-client.onrender.com",
+    ];
+
 app.use(
   cors({
-    origin: "https://xeno-client.onrender.com",
+    origin: allowedOrigins,
   }),
 );
 app.use(express.json());
-
-app.use("/output", express.static(OUTPUT_DIR));
 
 app.use("/api", uploadRoutes);
 
